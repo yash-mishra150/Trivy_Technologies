@@ -1,1 +1,1 @@
-### Assignment Trivy Technologies 
+# Assignment Trivy Technologies 
