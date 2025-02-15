@@ -1,16 +1,28 @@
 import * as React from 'react';
 import { Image, StatusBar, Text, TouchableOpacity, View } from 'react-native';
-
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import ImageWithOverlay from '../components/ImageText';
+import { faker } from '@faker-js/faker';
 
 interface PayPageProps { }
 
+
 const PayPage = (props: PayPageProps) => {
   const [freeze, setfreeze] = React.useState(false)
-  const TestData = {
-    cardno: [1231, 1231, 1231, 1333], name: "ABC", CVV: 123, expiry: "01/28", BankName: "YesBank", BankIcon: null
-  }
+
+  const testData = React.useMemo(() => {
+    const bankName = faker.company.name();
+    const bankLogo = `https://source.unsplash.com/featured/?bank,money,finance`;
+
+    return {
+      cardno: Array.from({ length: 4 }, () => faker.number.int({ min: 1000, max: 9999 })),
+      name: faker.person.fullName(),
+      CVV: faker.number.int({ min: 100, max: 999 }),
+      expiry: faker.date.future().toLocaleDateString('en-GB', { month: '2-digit', year: '2-digit' }).replace(' ', '/'),
+      BankName: bankName,
+      BankIcon: bankLogo,
+    };
+  }, []);
 
   const HandleFreeze = () => {
     setfreeze(!freeze)
@@ -33,7 +45,7 @@ const PayPage = (props: PayPageProps) => {
       <View className='mt-14'>
         <Text style={{ fontFamily: "Poppins-Medium" }} className='text-neutral-600 mb-10 text-lg'>YOUR DIGITAL DEBIT CARD</Text>
         <View className='flex flex-row gap-5 items-center'>
-          <ImageWithOverlay freeze={freeze} TestData={TestData} />
+          <ImageWithOverlay freeze={freeze} TestData={testData} />
           <View className="flex flex-col gap-3">
             <TouchableOpacity
               onPress={HandleFreeze}

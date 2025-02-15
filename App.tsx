@@ -21,7 +21,7 @@ const { width } = Dimensions.get("window");
 const CustomTabBar = ({ state, descriptors, navigation }: any) => {
   return (
     <View style={styles.tabBarContainer}>
-      {/* Gradient Effect at the Top */}
+      {/* Gradient Line */}
       <Svg width={width} height={60} viewBox={`0 0 ${width} 60`} style={styles.svgStyle}>
         <Defs>
           <LinearGradient id="topGradient" x1="0" y1="0" x2="1" y2="0">
@@ -38,7 +38,7 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
         />
       </Svg>
 
-      {/* Custom Tab Buttons */}
+      {/* Custom Tab Buttons with  */}
       <View style={styles.tabBarInner}>
         {state.routes.map((route: any, index: number) => {
           const { options } = descriptors[route.key];
@@ -65,9 +65,9 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
                 style={[
                   styles.iconContainer,
                   {
-                    borderColor: isFocused ? "white" : "gray",
-                    borderTopWidth: 2,
-                    borderRightWidth: 2,
+                    borderColor: isFocused ? "#a3a3a3" : "#525252",
+                    borderTopWidth: 1,
+                    borderRightWidth: 1,
                   },
                   isPay && styles.payIconContainer,
                 ]}
